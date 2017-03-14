@@ -6,6 +6,7 @@
 #include <iostream>
 using namespace std;
 #include <ctime>
+#include <stdlib.h>
 
 
 /**
@@ -32,22 +33,23 @@ void hanoi (int M, int i, int j)
   if (M > 0)
     {
       hanoi(M-1, i, 6-i-j);
-      cout << i << " -> " << j << endl;
+      //cout << i << " -> " << j << endl;
       hanoi (M-1, 6-i-j, j);
   }
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+  int value = atoi(argv[1]);
+  
+  clock_t tantes, tdespues;
+  
+  
+  tantes = clock();
+  hanoi(value, 1, 2);
+  tdespues = clock();
 
-  int M;
-  do
-    {
-      cout << "Número de discos: ";
-      cin >> M;
-    } while (M <= 0);
-
-  hanoi(M, 1, 2);
+  cout << value << " " << (double)(tdespues - tantes) / CLOCKS_PER_SEC << endl;
 
   return 0;
 }
