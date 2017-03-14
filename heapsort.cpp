@@ -1,5 +1,5 @@
 /**
-   @file Ordenación por montones
+   @file Ordenaciï¿½n por montones
 */
 
    
@@ -16,18 +16,18 @@ using namespace std;
 
 
 /* ************************************************************ */ 
-/*  Método de ordenación por montones  */
+/*  Mï¿½todo de ordenaciï¿½n por montones  */
 
 /**
-   @brief Ordena un vector por el método de montones.
+   @brief Ordena un vector por el mï¿½todo de montones.
 
    @param T: vector de elementos. Debe tener num_elem elementos.
              Es MODIFICADO.
-   @param num_elem: número de elementos. num_elem > 0.
+   @param num_elem: nï¿½mero de elementos. num_elem > 0.
 
    Cambia el orden de los elementos de T de forma que los dispone
    en sentido creciente de menor a mayor.
-   Aplica el algoritmo de ordenación por montones.
+   Aplica el algoritmo de ordenaciï¿½n por montones.
 */
 inline static 
 void heapsort(int T[], int num_elem);
@@ -35,16 +35,16 @@ void heapsort(int T[], int num_elem);
 
 
 /**
-   @brief Reajusta parte de un vector para que sea un montón.
+   @brief Reajusta parte de un vector para que sea un montï¿½n.
 
    @param T: vector de elementos. Debe tener num_elem elementos.
              Es MODIFICADO.
-   @param num_elem: número de elementos. num_elem > 0.
-   @param k: índice del elemento que se toma com raíz
+   @param num_elem: nï¿½mero de elementos. num_elem > 0.
+   @param k: ï¿½ndice del elemento que se toma com raï¿½z
    
    Reajusta los elementos entre las posiciones k y num_elem - 1 
-   de T para que cumpla la propiedad de un montón (APO), 
-   considerando al elemento en la posición k como la raíz.
+   de T para que cumpla la propiedad de un montï¿½n (APO), 
+   considerando al elemento en la posiciï¿½n k como la raï¿½z.
 */
 static void reajustar(int T[], int num_elem, int k);
 
@@ -52,7 +52,7 @@ static void reajustar(int T[], int num_elem, int k);
 
 
 /**
-   Implementación de las funciones
+   Implementaciï¿½n de las funciones
 **/
 
 
@@ -91,11 +91,16 @@ static void reajustar(int T[], int num_elem, int k)
 }
   
       
-int main()
+int main(int argc, char* argv[])
 {
-  int n;
-  cout << "Introduce número de elementos del vector: ";
+  int n = atoi(argv[1]);
+	clock_t tantes;
+	clock_t tdespues;
+
+	/*  
+	cout << "Introduce numero de elementos del vector: ";
   cin >> n;
+	*/
 
   int * T = new int[n];
   assert(T);
@@ -107,14 +112,15 @@ int main()
       T[i] = random();
     };
 
-  // escribe_vector(T, n);
+  tantes = clock();
 
   heapsort(T, n);
 
-  // escribe_vector(T, n);
-
+	tdespues = clock();
 
   delete [] T;
 
+	cout << n << " " << (double)(tdespues-tantes) / CLOCKS_PER_SEC << endl ;
+  
   return 0;
 };

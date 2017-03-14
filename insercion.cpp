@@ -1,5 +1,5 @@
 /**
-   @file Ordenación por inserción
+   @file Ordenaciï¿½n por inserciï¿½n
 */
 
    
@@ -11,23 +11,19 @@ using namespace std;
 #include <cassert>
 
 
-
-
-
-
 /* ************************************************************ */ 
-/*  Método de ordenación por inserción  */
+/*  Mï¿½todo de ordenaciï¿½n por inserciï¿½n  */
 
 /**
-   @brief Ordena un vector por el método de inserción.
+   @brief Ordena un vector por el mï¿½todo de inserciï¿½n.
 
    @param T: vector de elementos. Debe tener num_elem elementos.
              Es MODIFICADO.
-   @param num_elem: número de elementos. num_elem > 0.
+   @param num_elem: nï¿½mero de elementos. num_elem > 0.
 
    Cambia el orden de los elementos de T de forma que los dispone
    en sentido creciente de menor a mayor.
-   Aplica el algoritmo de inserción.
+   Aplica el algoritmo de inserciï¿½n.
 */
 inline static 
 void insercion(int T[], int num_elem);
@@ -35,27 +31,27 @@ void insercion(int T[], int num_elem);
 
 
 /**
-   @brief Ordena parte de un vector por el método de inserción.
+   @brief Ordena parte de un vector por el mï¿½todo de inserciï¿½n.
 
-   @param T: vector de elementos. Tiene un número de elementos 
+   @param T: vector de elementos. Tiene un nï¿½mero de elementos 
                    mayor o igual a final. Es MODIFICADO.
-   @param inicial: Posición que marca el incio de la parte del
+   @param inicial: Posiciï¿½n que marca el incio de la parte del
                    vector a ordenar.
-   @param final: Posición detrás de la última de la parte del
+   @param final: Posiciï¿½n detrï¿½s de la ï¿½ltima de la parte del
                    vector a ordenar. 
 		   inicial < final.
 
    Cambia el orden de los elementos de T entre las posiciones
    inicial y final - 1de forma que los dispone en sentido creciente
    de menor a mayor.
-   Aplica el algoritmo de inserción.
+   Aplica el algoritmo de inserciï¿½n.
 */
 static void insercion_lims(int T[], int inicial, int final);
 
 
 
 /**
-   Implementación de las funciones
+   Implementaciï¿½n de las funciones
 **/
 
 inline static void insercion(int T[], int num_elem)
@@ -81,11 +77,16 @@ static void insercion_lims(int T[], int inicial, int final)
 
 
 
-int main()
+int main(int argc, char* argv[])
 {
-  int n;
-  cout << "Introduce número de elementos del vector: ";
+  int n = atoi(argv[1]);
+	clock_t tantes;
+	clock_t tdespues;
+
+	/*
+  cout << "Introduce numero de elementos del vector: ";
   cin >> n;
+	*/
 
   int * T = new int[n];
   assert(T);
@@ -97,9 +98,14 @@ int main()
       T[i] = random();
     };
 
+	tantes = clock();
+
   insercion(T, n);
+
+	tdespues = clock();
 
   delete [] T;
 
+	cout << n << " " << (double)(tdespues-tantes) / CLOCKS_PER_SEC << endl ;
   return 0;
 };
