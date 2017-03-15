@@ -192,7 +192,6 @@ int main(int argc, char* argv[])
   clock_t tantes;
   clock_t tdespues;
   //Captura el valor del reloj antes de la llamada a burbuja
-  tantes = clock();
   int n = atoi(argv[1]);
 
   int * T = new int[n];
@@ -204,6 +203,7 @@ int main(int argc, char* argv[])
     {
       T[i] = random();
     };
+    tantes = clock();
 
   quicksort(T, n);
   tdespues = clock();
