@@ -1,6 +1,6 @@
 ORDENES
 
-	- Ver archivo /proc/cpuinfo  
+	- Ver archivo /proc/cpuinfo
 	- free (memoria)
 	- cat /etc/issue
 
@@ -27,21 +27,20 @@ Algoritmos:
 
 
 ~~~~~~~~~~~~~~~~MIGUEL Ángel~~~~~~~~~~~~~~~~~~~~~~~~~~
-Nº de procesadores : 
-Procesadores : 
-cache size : 
-Memoria : 
-SO : 
+Nº de procesadores :
+Procesadores :
+cache size :
+Memoria :
+SO :
 
 Algoritmos:
 ~~~~~~~~~~~~~~~~ANTONIO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nº de procesadores : 
-Procesadores : 
-cache size : 
-Memoria : 
-SO :
+Nº de procesadores : 4
+Procesadores : Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz
+cache size : 3072 KB
+Memoria : ~ 8GB
+SO : Ubuntu 16.04.2 LTS
 
-Algoritmos:
+Algoritmos:Selección y Floyd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
