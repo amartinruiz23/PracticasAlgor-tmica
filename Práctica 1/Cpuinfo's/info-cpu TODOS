@@ -14,6 +14,8 @@ cache size : 3863 KB
 Memoria : ~ 4GB
 SO : Linux - Ubuntu 16.04.2 LTS 64-bits
 
+Algoritmos: Hanoi y Mergesort
+
 ~~~~~~~~~~~~~~~~~~Álvaro~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Nº de procesadores : 4
 Procesadores : Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz
@@ -21,6 +23,7 @@ cache size : 3072 KB
 Memoria : ~ 16GB
 SO : Linux - Ubuntu 14.04.5 x86_64
 
+Algoritmos:
 
 
 ~~~~~~~~~~~~~~~~MIGUEL Ángel~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,6 +33,7 @@ cache size :
 Memoria : 
 SO : 
 
+Algoritmos:
 ~~~~~~~~~~~~~~~~ANTONIO~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nº de procesadores : 
@@ -38,5 +42,6 @@ cache size :
 Memoria : 
 SO :
 
+Algoritmos:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
