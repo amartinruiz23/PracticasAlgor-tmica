@@ -1,0 +1,123 @@
+
+
+*******************************************************************************
+Wed Mar 22 13:53:48 2017
+
+
+FIT:    data read from 'heapsort_OPTIMIZADO.dat'
+        format = z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 6.56699e+19       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 6.55129e+08
+
+initial set of free parameter values
+
+a0              = 1
+a1              = 1
+a2              = 1
+
+After 13 iterations the fit converged.
+final sum of squares of residuals : 1.1123e-06
+rel. change during last iteration : -4.34827e-13
+
+degrees of freedom    (FIT_NDF)                        : 48
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000152226
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.31728e-08
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a0              = 1.36653e-13      +/- 1.101e-13    (80.54%)
+a1              = 9.74433e-08      +/- 5.69e-09     (5.84%)
+a2              = -5.82944e-05     +/- 6.152e-05    (105.5%)
+
+
+correlation matrix of the fit parameters:
+
+               a0     a1     a2     
+a0              1.000 
+a1             -0.967  1.000 
+a2              0.730 -0.856  1.000 
+
+
+*******************************************************************************
+Wed Mar 22 13:54:01 2017
+
+
+FIT:    data read from 'heapsort_OPTIMIZADO.dat'
+        format = z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 4.29275e+10       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 20514.2
+
+initial set of free parameter values
+
+a3              = 1
+a4              = 1
+
+After 8 iterations the fit converged.
+final sum of squares of residuals : 1.14802e-06
+rel. change during last iteration : -6.6436e-09
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.000153065
+variance of residuals (reduced chisquare) = WSSR/ndf   : 2.3429e-08
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a3              = 1.04276e-07      +/- 1.456e-09    (1.396%)
+a4              = -0.000114094     +/- 4.224e-05    (37.03%)
+
+
+correlation matrix of the fit parameters:
+
+               a3     a4     
+a3              1.000 
+a4             -0.862  1.000 
+
+
+*******************************************************************************
+Wed Mar 22 13:54:10 2017
+
+
+FIT:    data read from 'heapsort_OPTIMIZADO.dat'
+        format = z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: h(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 6.56699e+19       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 7.03273e+09
+
+initial set of free parameter values
+
+a5              = 1
+a6              = 1
+a7              = 1
+BREAK:          Undefined value during function evaluation
+
