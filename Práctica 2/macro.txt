@@ -1,0 +1,7 @@
+#!/bin/csh -vx
+
+@ i = 0
+while ( $i <= 50000 )
+./fuerza_bruta $i >> fuerza_bruta.dat
+@ i += 1000
+end

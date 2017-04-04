@@ -62,7 +62,7 @@ int main(int argc, char * argv[]) {
 	invertidos = comparaPreferencias (T,n);
 	tdespues = clock();
 
-	cout << n << " " << (double)(tdespues-tantes)/CLOCKS_PER_SEC ;
+	cout << n << " " << (double)(tdespues-tantes)/CLOCKS_PER_SEC << endl ;
 
 }
 
