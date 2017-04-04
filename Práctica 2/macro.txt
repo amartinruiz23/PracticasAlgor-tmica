@@ -2,6 +2,6 @@
 
 @ i = 0
 while ( $i <= 50000)
-./divide_y_venceras $i >> divide_y_venceras.dat
+./fuerza_bruta $i >> fuerza_bruta_chino.dat
 @ i += 1000
 end
