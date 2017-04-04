@@ -16,26 +16,8 @@ double uniforme() //Genera un n�mero uniformemente distribuido en el
  return (double)t/f;
 }
 
-int comparaPreferencias (int * v , const int TAM ) {
-	if (TAM == 0)
-		return 0 ;
 
-	const int MITAD = TAM /2 ;
-	int * preferencias1 = new int [MITAD];
-	int * preferencias2 = new int [MITAD];
-	preferencias1 = v ;
-
-	int pref1 = comparaPreferencias (preferencias1, MITAD);
-	int pref2 = comparaPreferencias (preferencias2, MITAD);
-	int total = pref1 + pref2 ;
-
-	total += contarInversiones (preferencias1, preferencias2, MITAD);
-
-	return total ;
-
-}
-
-int contarInversiones ( int * preferencias1, int * preferencias2, const int TAM) {
+int contarInversiones( int * preferencias1, int * preferencias2, const int TAM) {
 
 	int total = 0 ;
 	for (int i = 0 ; i < TAM ; i++) {
@@ -53,6 +35,27 @@ int contarInversiones ( int * preferencias1, int * preferencias2, const int TAM)
 	return total;
 }
 
+int comparaPreferencias(int * v , const int TAM ) {
+	if (TAM == 0)
+		return 0 ;
+
+	const int MITAD = TAM /2 ;
+	int * preferencias1 = new int [MITAD];
+	int * preferencias2 = new int [MITAD];
+	preferencias1 = v ;
+
+	int pref1 = comparaPreferencias(preferencias1, MITAD);
+	int pref2 = comparaPreferencias(preferencias2, MITAD);
+	int total = pref1 + pref2 ;
+
+	total += contarInversiones(preferencias1, preferencias2, MITAD);
+
+	return total ;
+
+}
+
+
+
 
 
 int main(int argc, char * argv[]) {
@@ -69,13 +72,14 @@ int main(int argc, char * argv[]) {
 
   srand(time(0));
 
-  for (int j=0; j<n; j++) T[j]=j; // Inicializamos
-  for (int j=n-1; j>0; j--) {
-    double u=uniforme();
-    int k=(int)(j*u);
-    int tmp=T[j];
-    T[j]=T[k];
-    T[k]=tmp;
+  for (int j = 0; j < n; j++) T[j]=j; // Inicializamos
+
+  for (int j = n-1; j > 0; j--) {
+    double u = uniforme();
+    int k = (int)(j*u);
+    int tmp = T[j];
+    T[j] = T[k];
+    T[k] = tmp;
   }
 	
 	clock_t tantes;
@@ -83,7 +87,7 @@ int main(int argc, char * argv[]) {
 	int invertidos = 0 ;
 
 	tantes = clock();
-	invertidos = comparaPreferencias (T,n);
+	invertidos = comparaPreferencias(T,n);
 	tdespues = clock();
 
 	cout << n << " " << (double)(tdespues-tantes)/CLOCKS_PER_SEC << endl ;
