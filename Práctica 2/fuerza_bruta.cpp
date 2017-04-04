@@ -63,6 +63,7 @@ int main(int argc, char * argv[]) {
 	tdespues = clock();
 
 	cout << n << " " << (double)(tdespues-tantes)/CLOCKS_PER_SEC << endl ;
+	delete [] T ;
 
 }
 
