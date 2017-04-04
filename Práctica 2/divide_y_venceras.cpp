@@ -1,53 +1,91 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
-
 using namespace std;
+#include <ctime>
+#include <cstdlib>
+#include <climits>
+#include <cassert>
 
-int getInvertidos (int * v1, int * v2) {
+//generador de ejemplos para el problema de la comparaci�n de preferencias. Simplemente se genera una permutaci�n aleatoria del vector 0,1,2,...,n-2,n-1
 
-	int invertidos = 0 ;
+double uniforme() //Genera un n�mero uniformemente distribuido en el
+                  //intervalo [0,1) a partir de uno de los generadores
+                  //disponibles en C.
+{
+ int t = rand();
+ double f = ((double)RAND_MAX+1.0);
+ return (double)t/f;
+}
 
-	for (int i = 0 ; i < n ; i++) {
-		for (int j = 0 ; j < n ; j++) {
-			if ( i < j && v2[i] > v2[j]) 
-				invertidos++;
+int comparaPreferencias (int * v , const int TAM ) {
+	if (TAM == 0)
+		return 0 ;
+
+	const int MITAD = TAM /2 ;
+	int * preferencias1 = new int [MITAD];
+	int * preferencias2 = new int [MITAD];
+	preferencias1 = v ;
+
+	int pref1 = comparaPreferencias (preferencias1, MITAD);
+	int pref2 = comparaPreferencias (preferencias2, MITAD);
+	int total = pref1 + pref2 ;
+
+	total += contarInversiones (preferencias1, preferencias2, MITAD);
+
+	return total ;
+
+}
+
+int contarInversiones ( int * preferencias1, int * preferencias2, const int TAM) {
+
+	int total = 0 ;
+	for (int i = 0 ; i < TAM ; i++) {
+		int j = 0 ;
+		bool menor = true ;
+		while (j < TAM && menor) {
+			if (preferencias2 [i%TAM] < preferencias1 [j]) {
+				j++;
+				total++;
+			}
+			else
+				menor = false;
 		}
 	}
-
-	return invertidos ;
-} 
-
-void inicializaV1 (int * v1) {
-
-	for (int i = 0 ; i < n ; i++)
-		v1[i] = i+1 ; // En el enunciado pone desde 1 a n
+	return total;
 }
 
-void inicializaV2 (int * v2) {
-
-	srand(time(NULL));
-	for (int i = 0 ; i < n ; i++)
-		v2[i] = rand()%n ; 
-}
 
 
 int main(int argc, char * argv[]) {
+
+  if (argc != 2) {
+      cerr << "Formato " << argv[0] << " <num_elem>" << endl;
+      return -1;
+  }
+
+  int n = atoi(argv[1]);
+
+  int * T = new int[n];
+  assert(T);
+
+  srand(time(0));
+
+  for (int j=0; j<n; j++) T[j]=j; // Inicializamos
+  for (int j=n-1; j>0; j--) {
+    double u=uniforme();
+    int k=(int)(j*u);
+    int tmp=T[j];
+    T[j]=T[k];
+    T[k]=tmp;
+  }
 	
-	if (argc != 2) {
-		cerr << "Formato " << argv[0] << " <num_elem>" << endl;
-		return -1;
-	}
+	clock_t tantes;
+	clock_t tdespues;
+	int invertidos = 0 ;
 
-	int n = atoi(argv[1]);
+	tantes = clock();
+	invertidos = comparaPreferencias (T,n);
+	tdespues = clock();
 
-	int * v1 = new int[n];
-	int * v2 = new int[n];
-	assert(v1);
-	assert(v2);
+	cout << n << " " << (double)(tdespues-tantes)/CLOCKS_PER_SEC ;
 
-	inicializaV1(&v1);
-	inicializaV2(&v2);
-	cout << n << " " << getInvertidos(&v1,&v2) << endl ;	
 }
-
