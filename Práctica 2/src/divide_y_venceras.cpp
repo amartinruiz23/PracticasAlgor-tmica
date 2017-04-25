@@ -24,7 +24,7 @@ int contarInversiones( int * preferencias1, int * preferencias2, const int TAM) 
     int j = 0 ;
     bool menor = true ;
     while (j < TAM && menor) {
-      if (preferencias2 [i%TAM] < preferencias1 [j]) {
+      if (preferencias2 [i] < preferencias1 [j]) {
 	j++;
 	total++;
       }
