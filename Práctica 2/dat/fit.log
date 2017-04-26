@@ -1,0 +1,17 @@
+
+
+*******************************************************************************
+Wed Apr 26 09:43:16 2017
+
+
+FIT:    data read from 'divide_y_venceras.dat'
+        format = z
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) =x*a0*x**a1+x*a2
+fitted parameters initialized with current variable values
+
+iter      chisq       delta/lim  lambda   a0            a1            a2           
+   0 6.5669916099e+19   0.00e+00  7.03e+09    1.000000e+00   1.000000e+00   1.000000e+00
