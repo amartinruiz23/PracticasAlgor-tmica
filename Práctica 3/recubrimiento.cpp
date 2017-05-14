@@ -28,25 +28,26 @@ class Par {
 		return segundo_elemento;
 	}
 
-	friend std::ostream& operator<<(std::ostream &s , const Par &p) {
-		s << '(' << p.getPrimerE() << "," << p.getSegundoE() << ")" << "\t" ;
+	friend std::ostream& operator<<(std::ostream &s , Par &p) {
+		s << "(" << p.getPrimerE() << "," << p.getSegundoE() << ")" << "\t" ;
 		return s ;
 	}	
 
 };
 
 
-vector<Par> recubrimiento ( vector<vector<int> > m ) {
+vector<Par> recubrimiento ( vector<vector<int> > m , int N) {
 
 	vector<Par> sol ;
 	int nodo_actual = 0 ;
 
 	for (int f = 0 ; f < N ; ++f) { 
-		for (int c = i+1 ; c < N ; ++c) {
+		nodo_actual = f ; // Se actualiza el nodo_inicial a la "etiqueta del nodo"		
+		for (int c = f+1 ; c < N ; ++c) {
 			if (m[f][c] != 0) {
 				Par p (nodo_actual, c);
 				sol.push_back(p);				
-				nodo_actual = c ; // Se actualiza el nodo_inicial a la "etiqueta del nodo"
+				
 			}
 		}
 	}
@@ -58,41 +59,42 @@ vector<Par> recubrimiento ( vector<vector<int> > m ) {
 int main (int argc, char* argv[]) {
 
 	if (argc < 2) {
-		cout << "Error en la entrada de parámetros. Recuerde: ./recubrimiento fichero_entrada" << endln ;
+		cout << "Error en la entrada de parámetros. Recuerde: ./recubrimiento fichero_entrada" << endl ;
 		return (-1);
 	}
 
-	char archivo[20] = argv[1];
+	char* archivo = (char*) argv[1];
 	int tamanio ;
 	int dato ;
+	vector<vector<int> > matriz ; // Se puede optimizar 
 
 	ifstream flujo (archivo) ;
+
 
 	if (flujo) {
 		flujo >> tamanio ;
 
-		char[2] salto_linea ;
+		char salto_linea[2] ;
 
-		vector<vector<int> > matriz ; // Se puede optimizar 
 
 		for (int f = 0; f < tamanio && flujo; ++f) {
 			flujo >> salto_linea ;
 			for (int c = 0; c < tamanio && flujo; ++c) {		// Se puede optimizar
 				flujo >> dato ;
-				matriz.push_back(dato); 
+				matriz[f][c] = dato; 
 			}
 		}
 
 	}
 	else {
-		cout << "Error al abrir el fichero" << endln ;
+		cout << "Error al abrir el fichero" << endl ;
 		return (-2);
 	}
 
 
-	vector<Par> solucion = recubrimiento ( matriz ) ;
+	vector<Par> solucion = recubrimiento ( matriz, tamanio ) ;
 
-	for (int i = 0; f < tamanio; ++f) 
+	for (int i = 0; i < tamanio; ++i) 
 			cout << solucion[i] ;
 		 
 
