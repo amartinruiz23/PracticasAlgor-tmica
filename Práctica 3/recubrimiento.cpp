@@ -1,15 +1,17 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <utility>
+
 using namespace std;
 
-class Par {
+/*class Par {
 
 	int primer_elemento ;
 	int segundo_elemento ;
 
 	public:
-	
+
 	Par (int p_e, int s_e) {
 		primer_elemento = p_e;
 		segundo_elemento = s_e;
@@ -31,30 +33,29 @@ class Par {
 	friend std::ostream& operator<<(std::ostream &s , Par &p) {
 		s << "(" << p.getPrimerE() << "," << p.getSegundoE() << ")" << "\t" ;
 		return s ;
-	}	
+	}
 
-};
+};*/
 
 
-vector<Par> recubrimiento ( vector<vector<int> > m , int N) {
+vector<pair<int, int> > recubrimiento ( vector<vector<int> > m , int N) {
 
-	vector<Par> sol ;
+	vector<pair<int, int> > sol ;
 	int nodo_actual = 0 ;
 
-	for (int f = 0 ; f < N ; ++f) { 
-		nodo_actual = f ; // Se actualiza el nodo_inicial a la "etiqueta del nodo"		
+	for (int f = 0 ; f < N ; ++f) {
+		nodo_actual = f ; // Se actualiza el nodo_inicial a la "etiqueta del nodo"
 		for (int c = f+1 ; c < N ; ++c) {
 			if (m[f][c] != 0) {
-				Par p (nodo_actual, c);
-				sol.push_back(p);				
-				
+				pair<int, int> p (nodo_actual, c);
+				sol.push_back(p);
 			}
 		}
 	}
 
 	return sol ;
 }
-		
+
 
 int main (int argc, char* argv[]) {
 
@@ -66,7 +67,7 @@ int main (int argc, char* argv[]) {
 	char* archivo = (char*) argv[1];
 	int tamanio ;
 	int dato ;
-	vector<vector<int> > matriz ; // Se puede optimizar 
+	vector<vector<int> > matriz ; // Se puede optimizar
 
 	ifstream flujo (archivo) ;
 
@@ -81,7 +82,7 @@ int main (int argc, char* argv[]) {
 			flujo >> salto_linea ;
 			for (int c = 0; c < tamanio && flujo; ++c) {		// Se puede optimizar
 				flujo >> dato ;
-				matriz[f][c] = dato; 
+				matriz[f][c] = dato;
 			}
 		}
 
@@ -92,11 +93,10 @@ int main (int argc, char* argv[]) {
 	}
 
 
-	vector<Par> solucion = recubrimiento ( matriz, tamanio ) ;
+	vector<pair<int, int> > solucion = recubrimiento ( matriz, tamanio ) ;
 
-	for (int i = 0; i < tamanio; ++i) 
-			cout << solucion[i] ;
-		 
+	for (int i = 0; i < tamanio; ++i)
+			cout << "(" << solucion[i].first <<", "<<solucion[i].second << ")\t";
+
 
 }
-
