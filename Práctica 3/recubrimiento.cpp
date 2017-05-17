@@ -68,31 +68,37 @@ int main (int argc, char* argv[]) {
 	int tamanio ;
 	int dato ;
 	vector<vector<int> > matriz ; // Se puede optimizar
-
+	cout << "a" << endl;
 	ifstream flujo (archivo) ;
 
+	matriz.resize(tamanio);
+	for (int i = 0; i < tamanio; i++)
+		matriz[i].resize(tamanio);
 
+	cout << "b" << endl;
 	if (flujo) {
+		cout << "c" << endl;
 		flujo >> tamanio ;
 
-		char salto_linea[2] ;
+		char basura[2] ;
 
 
-		for (int f = 0; f < tamanio && flujo; ++f) {
-			flujo >> salto_linea ;
-			for (int c = 0; c < tamanio && flujo; ++c) {		// Se puede optimizar
-				flujo >> dato ;
-				matriz[f][c] = dato;
+		for (int f = 0; (f < tamanio) && flujo; ++f) {
+			flujo >> basura ; cout << "c2" <<endl;
+			for (int c = 0; (c < tamanio) && flujo; ++c) {		// Se puede optimizar
+				flujo >> dato ; cout << "c3"<<endl;
+				//matriz[f][c] = dato; cout << "c4"<<endl;
+				flujo >> basura;
 			}
 		}
-
+		cout << "c1" << endl;
 	}
 	else {
 		cout << "Error al abrir el fichero" << endl ;
 		return (-2);
 	}
 
-
+	cout << "d" << endl;
 	vector<pair<int, int> > solucion = recubrimiento ( matriz, tamanio ) ;
 
 	for (int i = 0; i < tamanio; ++i)
