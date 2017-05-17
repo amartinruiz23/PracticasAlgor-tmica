@@ -79,15 +79,16 @@ int main (int argc, char* argv[]) {
 	if (flujo) {
 		cout << "c" << endl;
 		flujo >> tamanio ;
-
-		char basura[2] ;
+		cout <<"TAM: "<< tamanio << endl;
+		char basura ;
 
 
 		for (int f = 0; (f < tamanio) && flujo; ++f) {
 			flujo >> basura ; cout << "c2" <<endl;
 			for (int c = 0; (c < tamanio) && flujo; ++c) {		// Se puede optimizar
 				flujo >> dato ; cout << "c3"<<endl;
-				//matriz[f][c] = dato; cout << "c4"<<endl;
+				cout <<"DATO: "<<dato << endl;
+				matriz[f][c] = dato; cout << "c4"<<endl;
 				flujo >> basura;
 			}
 		}
