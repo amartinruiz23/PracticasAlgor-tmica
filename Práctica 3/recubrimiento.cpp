@@ -5,48 +5,14 @@
 
 using namespace std;
 
-/*class Par {
-
-	int primer_elemento ;
-	int segundo_elemento ;
-
-	public:
-
-	Par (int p_e, int s_e) {
-		primer_elemento = p_e;
-		segundo_elemento = s_e;
-	}
-
-	Par () {
-		primer_elemento = 0 ;
-		segundo_elemento = 0 ;
-	}
-
-	int getPrimerE () {
-		return primer_elemento;
-	}
-
-	int getSegundoE () {
-		return segundo_elemento;
-	}
-
-	friend std::ostream& operator<<(std::ostream &s , Par &p) {
-		s << "(" << p.getPrimerE() << "," << p.getSegundoE() << ")" << "\t" ;
-		return s ;
-	}
-
-};*/
-
-
 vector<pair<int, int> > recubrimiento ( vector<vector<int> > m , int N) {
 
-	cout << "dentro de recubrimiento" << endl ;
 	vector<pair<int, int> > sol ;
 	
 	int nodo_actual = 0 ;
 
-	for (int f = 0 ; f < N ; ++f) {
-		nodo_actual = f ; // Se actualiza el nodo_inicial a la "etiqueta del nodo"
+	for (int f = 0 ; f < N-1 ; ++f) {
+		nodo_actual = f ; 
 		for (int c = f+1 ; c < N ; ++c) {
 			if (m[f][c] != 0) {
 				pair<int, int> p (nodo_actual, c);
@@ -69,7 +35,7 @@ int main (int argc, char* argv[]) {
 	char* archivo = (char*) argv[1];
 	int tamanio ;
 	int dato ;
-	vector<vector<int> > matriz ; // Se puede optimizar
+	vector<vector<int> > matriz ; 
 	ifstream flujo (archivo) ;
 	
 	if (flujo) {
@@ -81,13 +47,13 @@ int main (int argc, char* argv[]) {
 	
 		for (int f = 0; (f < tamanio) && flujo; ++f) {
 			cout << "\n" ;
-			for (int c = 0; (c < tamanio) && flujo; ++c) {		// Se puede optimizar
+			for (int c = 0; (c < tamanio) && flujo; ++c) {	
 				flujo >> dato ; 
 				cout << dato;
 				matriz[f][c] = dato; 
 			}
 		}
-		cout << "\n" ;
+		cout << "\n\n" ;
 	
 	}
 	else {
@@ -97,9 +63,10 @@ int main (int argc, char* argv[]) {
 
 	vector<pair<int, int> > solucion = recubrimiento ( matriz, tamanio ) ;
 
-	
-	for (int i = 0; i < tamanio; ++i)
-			cout << "(" << solucion[i].first <<", "<<solucion[i].second << ")\t";
-	
+	cout << "Conjunto de aristas solución: " ;
+	for (int i = 0; i < solucion.size(); ++i) 
+			cout << "(" << solucion[i].first <<","<< solucion[i].second << ")";
+
+	cout << "\n" ;	
 
 }
