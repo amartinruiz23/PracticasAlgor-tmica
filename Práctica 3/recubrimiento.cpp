@@ -42,7 +42,7 @@ vector<pair<int, int> > recubrimiento ( vector<vector<int> > m , int N) {
 
 	cout << "dentro de recubrimiento" << endl ;
 	vector<pair<int, int> > sol ;
-	/*
+	
 	int nodo_actual = 0 ;
 
 	for (int f = 0 ; f < N ; ++f) {
@@ -54,7 +54,7 @@ vector<pair<int, int> > recubrimiento ( vector<vector<int> > m , int N) {
 			}
 		}
 	}
-	*/
+	
 	return sol ;
 }
 
@@ -80,12 +80,14 @@ int main (int argc, char* argv[]) {
 		cout <<"TAM: "<< tamanio << endl;
 	
 		for (int f = 0; (f < tamanio) && flujo; ++f) {
+			cout << "\n" ;
 			for (int c = 0; (c < tamanio) && flujo; ++c) {		// Se puede optimizar
 				flujo >> dato ; 
-				//cout <<"DATO: "<<dato << endl;
+				cout << dato;
 				matriz[f][c] = dato; 
 			}
 		}
+		cout << "\n" ;
 	
 	}
 	else {
@@ -95,9 +97,9 @@ int main (int argc, char* argv[]) {
 
 	vector<pair<int, int> > solucion = recubrimiento ( matriz, tamanio ) ;
 
-	/*
+	
 	for (int i = 0; i < tamanio; ++i)
 			cout << "(" << solucion[i].first <<", "<<solucion[i].second << ")\t";
-	*/
+	
 
 }
