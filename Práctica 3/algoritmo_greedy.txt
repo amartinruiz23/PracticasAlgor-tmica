@@ -1,16 +1,16 @@
-- Lista de candidatos: Todos los nodos del grafo
+Lista de candidatos: Todos los pares de nodos del grafo (aristas)
 - Lista de candidatos utilizados: Pares de nodos que se han utilizado del grafo original
-- Función solución: Todos los nodos están en la lista de candidatos utilizados / Las aristas (n1,n2) que unen los nodos utilizados incluyen a todos los nodos 
-- Funcion selección: Siguiente nodo
-- Criterio de factibilidad: Que el nodo al que se "llega" no esté en la lista de candidatos utilizada
+- Función solución: Todos los nodos están en la lista de candidatos utilizados / Las aristas (n1,n2) que unen los nodos utilizados incluyen a todos los nodos
+- Funcion selección: Siguiente par de nodos
+- Criterio de factibilidad: Alguno de los dos nodos del par de nodos no se encuentra en el recubrimiento
 - Función objetivo: Obtener un recubrimiento con el mínimo de aristas o pares de nodos
-
 Grafo G = (V,E) donde V = nodos, E = aristas
+
 
 S = solución inicialmente vacía
 nodo_inicial = primer elemento en la matriz de adyacencia = m[0][0]
 
-for (int f = 0 ; f < N ; ++f) { 
+for (int f = 0 ; f < N ; ++f) {
 	for (int c = i+1 ; c < N ; ++c) {
 		if (m[f][c] != 0) {
 			S = S + (nodo_inicial, m[f][c]) ;
@@ -22,5 +22,3 @@ for (int f = 0 ; f < N ; ++f) {
 }
 
 return S ;
-
-
