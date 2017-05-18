@@ -1,30 +1,68 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <utility>
 
 using namespace std;
 
-vector<pair<int, int> > recubrimiento ( vector<vector<int> > m , int N) {
-
-	vector<pair<int, int> > sol ;
-	
-	int nodo_actual = 0 ;
-
-	for (int f = 0 ; f < N-1 ; ++f) {
-		nodo_actual = f ; 
-		for (int c = f+1 ; c < N ; ++c) {
-			if (m[f][c] != 0) {
-				pair<int, int> p (nodo_actual, c);
-				sol.push_back(p);
-			}
-		}
-	}
-	
-	return sol ;
+bool isIncluded (int a, vector<int> LC) {
+	if(find(LC.begin(), LC.end(), a) != LC.end()) 
+		return true ;
+	else 
+		return false ;
 }
 
+int getNodoMaxInc (vector<vector<int> > m, vector<int> LC) {
 
+	int N = m.size();
+	int max = 0 ;
+	int contador = 0 ;
+
+	for (int f = 0 ; f < N ; f++) {
+		
+		if (contador > max) 
+			max = f ;
+
+		contador = 0 ;
+
+		if ( isIncluded(f, LC) ) {
+
+			for (int c = f+1 ; c < N ; c++) {
+				if ( m[f][c] == 1 ) 
+					contador++;
+			}
+
+		}
+
+	}
+
+	return max ;
+
+}
+
+vector<int> recubrimiento (vector<vector<int> > m , int N) {
+
+	vector<int> sol ;
+	vector<int> LC ;
+	int nodo ;
+
+  // Inicializar la lista de candidatos
+
+  for (int i= 0; i<N; i++)
+    LC.push_back(i);
+
+
+  while ( !LC.empty() ) { // Mientras la lista de candidatos no esté vacía...
+
+		nodo = getNodoMaxInc(m, LC);
+		sol.push_back(nodo);
+		LC.erase (LC.begin()+nodo);
+	
+	}
+
+	return sol ;
+
+}
+	
 int main (int argc, char* argv[]) {
 
 	if (argc < 2) {
@@ -61,11 +99,11 @@ int main (int argc, char* argv[]) {
 		return (-2);
 	}
 
-	vector<pair<int, int> > solucion = recubrimiento ( matriz, tamanio ) ;
+	vector<int> solucion = recubrimiento ( matriz, tamanio ) ;
 
 	cout << "Conjunto de aristas solución: " ;
 	for (int i = 0; i < solucion.size(); ++i) 
-			cout << "(" << solucion[i].first <<","<< solucion[i].second << ")";
+			cout << solucion[i] << "," ;
 
 	cout << "\n" ;	
 
