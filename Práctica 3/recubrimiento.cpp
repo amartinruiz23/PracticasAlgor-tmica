@@ -6,6 +6,36 @@
 int tamanio ; // Tamaño de la matriz de adyacencia que le pasamos al ejecutable
 
 /*
+ * @brief : función que devuelve si dos vectores tienen los mismos elementos
+ * @param : v1 primer vector a comparar
+ * @param : v2 segundo vector a comparar
+ * @return : bool si tienen los mismos elementos o no
+*/
+
+bool iguales (std::vector<int> v1, std::vector<int> v2) {
+
+	int c = 0 ;
+
+	if (v1.size() != v2.size())
+		return false ;
+
+	for (int i = 0 ; i < v1.size() ; i++) {
+		for (int j = 0 ; j < v2.size() ; j++) {
+			if (v1[i] == v2[j]) {
+				c++ ;
+				j = v2.size() ;
+			}
+		}
+	}
+
+	if (c == v1.size())
+		return true ;
+	else 
+		return false ;
+
+}
+
+/*
  * @brief : función que nos indica si un elemento está incluido o no en el vector
  * @param : v vector 
  * @param : x elemento que queremos saber si está o no dentro del vector
@@ -34,8 +64,9 @@ void adyacencias (int nodo, std::vector<int> &NC, std::vector<std::vector<int> >
 			
 	for (int c = 0 ; c < tamanio ; c++) {
 		if (m[nodo][c] != 0) {
-			if ( !contains(NC,c) )
+			if ( !contains(NC,c) ) 
 				NC.push_back(c);
+			
 		}
 	}
 
@@ -60,7 +91,7 @@ int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> &LCU) {
 
 			if ( !contains (LCU, f) ) { 	// Si el nodo actual no ha sido usado ya
 
-				for (int c = f+1 ; c < tamanio ; c++) {
+				for (int c = 0 ; c < tamanio ; c++) {
 					if ( m[f][c] == 1 ) 
 						contador++;
 				}
@@ -92,13 +123,14 @@ std::vector<int> recubrimiento (std::vector<std::vector<int> > m) {
 	int nodo ;
 
 
-  while ( (nodos != NC) && (nodo != -1) ) { 		// mientras no estén recubiertos todos los nodos
+  while ( (!iguales(NC, nodos))  ) { 		// mientras no estén recubiertos todos los nodos
 	
 		nodo = getNodoMaxInc(m, LCU);								// obten el nodo con mayor nº de incidencias
 	
 		if (nodo != -1) {
 
-			NC.push_back(nodo);												// añadimos el nodo al recubrimiento
+			if ( !contains(NC,nodo) )
+				NC.push_back(nodo);												// añadimos el nodo al recubrimiento
 			adyacencias(nodo, NC, m);									// y sus adyacentes
 
 			sol.push_back(nodo);											// añadimos el nodo a la solución
