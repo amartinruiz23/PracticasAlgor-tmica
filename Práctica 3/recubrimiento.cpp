@@ -1,17 +1,20 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
-using namespace std;
-
-bool isIncluded (int a, vector<int> LC) {
-	if(find(LC.begin(), LC.end(), a) != LC.end()) 
+bool contains (std::vector<int> LC, int x) {
+	
+	if (LC.empty())
+		return false ;
+	
+	if(std::find(LC.begin(), LC.end(), x) != LC.end()) 
 		return true ;
 	else 
 		return false ;
 }
 
-int getNodoMaxInc (vector<vector<int> > m, vector<int> LC) {
+int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
 
 	int N = m.size();
 	int max = 0 ;
@@ -24,7 +27,7 @@ int getNodoMaxInc (vector<vector<int> > m, vector<int> LC) {
 
 		contador = 0 ;
 
-		if ( isIncluded(f, LC) ) {
+		if ( contains(LC, f) ) {
 
 			for (int c = f+1 ; c < N ; c++) {
 				if ( m[f][c] == 1 ) 
@@ -39,10 +42,10 @@ int getNodoMaxInc (vector<vector<int> > m, vector<int> LC) {
 
 }
 
-vector<int> recubrimiento (vector<vector<int> > m , int N) {
+std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
 
-	vector<int> sol ;
-	vector<int> LC ;
+	std::vector<int> sol ;
+	std::vector<int> LC ;
 	int nodo ;
 
   // Inicializar la lista de candidatos
@@ -66,45 +69,45 @@ vector<int> recubrimiento (vector<vector<int> > m , int N) {
 int main (int argc, char* argv[]) {
 
 	if (argc < 2) {
-		cout << "Error en la entrada de parámetros. Recuerde: ./recubrimiento fichero_entrada" << endl ;
+		std::cout << "Error en la entrada de parámetros. Recuerde: ./recubrimiento fichero_entrada" << std::endl ;
 		return (-1);
 	}
 
 	char* archivo = (char*) argv[1];
 	int tamanio ;
 	int dato ;
-	vector<vector<int> > matriz ; 
-	ifstream flujo (archivo) ;
+	std::vector<std::vector<int> > matriz ; 
+	std::ifstream flujo (archivo) ;
 	
 	if (flujo) {
 		flujo >> tamanio ;
 		matriz.resize(tamanio);
 		for (int i = 0; i < tamanio; i++)
 			matriz[i].resize(tamanio);
-		cout <<"TAM: "<< tamanio << endl;
+		std::cout <<"TAM: "<< tamanio << std::endl;
 	
 		for (int f = 0; (f < tamanio) && flujo; ++f) {
-			cout << "\n" ;
+			std::cout << "\n" ;
 			for (int c = 0; (c < tamanio) && flujo; ++c) {	
 				flujo >> dato ; 
-				cout << dato;
+				std::cout << dato;
 				matriz[f][c] = dato; 
 			}
 		}
-		cout << "\n\n" ;
+		std::cout << "\n\n" ;
 	
 	}
 	else {
-		cout << "Error al abrir el fichero" << endl ;
+		std::cout << "Error al abrir el fichero" << std::endl ;
 		return (-2);
 	}
 
-	vector<int> solucion = recubrimiento ( matriz, tamanio ) ;
+	std::vector<int> solucion = recubrimiento ( matriz, tamanio ) ;
 
-	cout << "Conjunto de aristas solución: " ;
+	std::cout << "Conjunto de aristas solución: " ;
 	for (int i = 0; i < solucion.size(); ++i) 
-			cout << solucion[i] << "," ;
+			std::cout << solucion[i] << "," ;
 
-	cout << "\n" ;	
+	std::cout << "\n" ;	
 
 }
