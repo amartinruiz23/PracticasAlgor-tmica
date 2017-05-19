@@ -3,90 +3,109 @@
 #include <vector>
 #include <algorithm>
 
-bool contains (std::vector<int> LC, int x) {
+int tamanio ; // Tamaño de la matriz de adyacencia que le pasamos al ejecutable
 
-	if (LC.empty())
+/*
+ * @brief : función que nos indica si un elemento está incluido o no en el vector
+ * @param : v vector 
+ * @param : x elemento que queremos saber si está o no dentro del vector
+ * @return : booleano indicando si está o no dentro
+*/
+
+bool contains (std::vector<int> v, int x) {
+
+	if (v.empty())
 		return false ;
 
-	if(std::find(LC.begin(), LC.end(), x) != LC.end())
+	if(std::find(v.begin(), v.end(), x) != v.end())
 		return true ;
 	else
 		return false ;
 }
 
-int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
+/*
+ * @brief : función que añade al vector Nodos Cubiertos (NC) los nodos adyacentes al nodo "nodo"
+ * @param : nodo del que queremos incluir sus adyacentes
+ * @param : NC lista de nodos cubiertos por el recubrimiento
+ * @param : m matriz de adyacencia del grafo
+*/
 
-	std::cout << "dentro de gNMI" << std::endl ;
-
-	int N = m.size();
-	std::cout << "N= " << N << std::endl ;
-	int max = -1 ;
-	int max_incidencias = 0 ;
-	int contador = 0 ;
-
-	for (int f = 0 ; f < N-1 ; f++) {
-
-		if ( contains(LC, f) ) {
-			std::cout << "LC contiene a f que vale " << f << std::endl ;
-
-			contador = 0 ;
-
-			for (int c = f+1 ; c < N ; c++) {
-				if ( m[f][c] == 1 )
-					contador++;
-			}
-
-			if (contador > max_incidencias){ //COMPARANDO NUMERO DE 1 CON NUMERO DE FILA
-				max = f ;
-				max_incidencias = contador;
-			}
-
+void adyacencias (int nodo, std::vector<int> &NC, std::vector<std::vector<int> > m) {
+			
+	for (int c = 0 ; c < tamanio ; c++) {
+		if (m[nodo][c] != 0) {
+			if ( !contains(NC,c) )
+				NC.push_back(c);
 		}
-
-
 	}
-	std::cout << "max = " << max << std::endl ;
-
-	return max ;
 
 }
 
-std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
+/*
+ * @brief : función que devuelve el nodo con mayor número de incidencias no usado de un grafo
+ * @param : m matriz de adyacencia del grafo
+ * @param : LCU lista de nodos usados
+ * @return : nodo con más incidencias no usado
+*/
 
-	//std::cout << "dentro de recubrimiento" << std::endl ;
+int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> &LCU) {
 
-	std::vector<int> sol ;
-	std::vector<int> LC ;
+	int nodo = -1 ;
+	int max_incidencias = 0 ;
+	int contador = 0 ;		// contador del número de adyacencias o 1s en una determinada fila de la matriz
+
+	for (int f = 0 ; f < tamanio-1 ; f++) {
+
+			contador = 0 ;
+
+			if ( !contains (LCU, f) ) { 	// Si el nodo actual no ha sido usado ya
+
+				for (int c = f+1 ; c < tamanio ; c++) {
+					if ( m[f][c] == 1 ) 
+						contador++;
+				}
+
+				if (contador > max_incidencias){ 	// Si es el nodo que más adyacencias tiene, actualizamos el máximo y lo devolvemos en su caso 
+					nodo = f ;
+					max_incidencias = contador;
+				}
+
+			}
+
+	}
+
+	LCU.push_back(nodo);
+	return nodo ;
+
+}
+
+std::vector<int> recubrimiento (std::vector<std::vector<int> > m) {
+
+	std::vector<int> nodos ; 											// lista de nodos
+
+  for (int i= 0; i<tamanio; i++)								// inicializamos lista de 
+    nodos.push_back(i);													// nodos
+
+	std::vector<int> sol ;												// lista de nodos solución / recubrimiento
+	std::vector<int> NC ;													// lista de nodos recubiertos
+	std::vector<int> LCU ;												// lista de candidatos utilizados
 	int nodo ;
 
-  // Inicializar la lista de candidatos
 
-  for (int i= 0; i<N; i++)
-    LC.push_back(i);
-
-	//std::cout << "dentro de recubrimiento2" << std::endl ;
-
-
-  while ( !LC.empty() && (nodo != -1) ) { // Mientras la lista de candidatos no esté vacía...
-	//std::cout << "dentro de recubrimientoI" << std::endl ;
-
-		nodo = getNodoMaxInc(m, LC);
-		std::cout << "nodo = " << nodo << std::endl ;
-
+  while ( (nodos != NC) && (nodo != -1) ) { 		// mientras no estén recubiertos todos los nodos
+	
+		nodo = getNodoMaxInc(m, LCU);								// obten el nodo con mayor nº de incidencias
+	
 		if (nodo != -1) {
-			sol.push_back(nodo);
-		//std::cout << "dentro de recubrimientoI2" << std::endl ;
-			for (int i = 0; i < LC.size(); i++) {
-				std::cout << "LC[i] = " << LC[i] << std::endl ;
-				if (LC[i] == nodo) {
-					std::cout << "voy a eliminar " << nodo << " de LC" << std::endl ;
-					LC.erase(LC.begin()+i);
-				}
-			}
+
+			NC.push_back(nodo);												// añadimos el nodo al recubrimiento
+			adyacencias(nodo, NC, m);									// y sus adyacentes
+
+			sol.push_back(nodo);											// añadimos el nodo a la solución
+
 		}
 
 	}
-	//std::cout << "dentro de recubrimientoN" << std::endl ;
 
 	return sol ;
 
@@ -100,17 +119,14 @@ int main (int argc, char* argv[]) {
 	}
 
 	char* archivo = (char*) argv[1];
-	int tamanio ;
 	int dato ;
 	std::vector<std::vector<int> > matriz ;
 	std::ifstream flujo (archivo) ;
 
-	std::cout << "a" << std::endl;
 
 	if (flujo) {
 		flujo >> tamanio ;
 		matriz.resize(tamanio);
-std::cout << "b" << std::endl ;
 		for (int i = 0; i < tamanio; i++)
 			matriz[i].resize(tamanio);
 		std::cout <<"TAM: "<< tamanio << std::endl;
@@ -123,17 +139,13 @@ std::cout << "b" << std::endl ;
 				matriz[f][c] = dato;
 			}
 		}
-std::cout << "c" << std::endl ;
-//		std::cout << "\n\n" << std::endl;
-	std::cout << "f" << std::endl ;
+	std::cout << "\n\n" << std::endl;
 	}
 	else {
 		std::cout << "Error al abrir el fichero" << std::endl ;
 		return (-2);
 	}
-std::cout << "d" << std::endl ;
-	std::vector<int> solucion = recubrimiento ( matriz, tamanio ) ;
-std::cout << "e" << std::endl ;
+	std::vector<int> solucion = recubrimiento (matriz) ;
 	std::cout << "Conjunto de aristas solución: " ;
 	for (int i = 0; i < solucion.size(); ++i)
 			std::cout << solucion[i] << " " ;
