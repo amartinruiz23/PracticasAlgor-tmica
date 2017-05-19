@@ -21,6 +21,7 @@ int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
 	int N = m.size();
 	std::cout << "N= " << N << std::endl ;
 	int max = 0 ;
+	int max_incidencias ;
 	int contador = 0 ;
 
 	for (int f = 0 ; f < N-1 ; f++) {
@@ -35,9 +36,10 @@ int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
 					contador++;
 			}
 
-			if (contador > max) //COMPARANDO NUMERO DE 1 CON NUMERO DE FILA
+			if (contador > max_incidencias){ //COMPARANDO NUMERO DE 1 CON NUMERO DE FILA
 				max = f ;
-
+				max_incidencias = contador;
+			}
 
 		}
 
@@ -65,7 +67,7 @@ std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
 	//std::cout << "dentro de recubrimiento2" << std::endl ;
 
 
-  while ( !LC.empty() && nodo != 0) { // Mientras la lista de candidatos no esté vacía...
+  while ( !LC.empty() ) { // Mientras la lista de candidatos no esté vacía...
 	//std::cout << "dentro de recubrimientoI" << std::endl ;
 
 		nodo = getNodoMaxInc(m, LC);
