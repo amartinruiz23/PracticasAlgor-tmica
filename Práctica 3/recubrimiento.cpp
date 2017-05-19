@@ -4,7 +4,7 @@
 #include <algorithm>
 
 bool contains (std::vector<int> LC, int x) {
-	
+
 	if (LC.empty())
 		return false ;
 	
@@ -44,6 +44,8 @@ int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
 
 std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
 
+	std::cout << "dentro de recubrimiento" << std::endl ;
+
 	std::vector<int> sol ;
 	std::vector<int> LC ;
 	int nodo ;
@@ -53,14 +55,24 @@ std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
   for (int i= 0; i<N; i++)
     LC.push_back(i);
 
+	std::cout << "dentro de recubrimiento2" << std::endl ;
+
 
   while ( !LC.empty() ) { // Mientras la lista de candidatos no esté vacía...
+	std::cout << "dentro de recubrimientoI" << std::endl ;
 
 		nodo = getNodoMaxInc(m, LC);
+		std::cout << "nodo = " << nodo << std::endl ;
 		sol.push_back(nodo);
-		LC.erase (LC.begin()+nodo);
+	std::cout << "dentro de recubrimientoI2" << std::endl ;
+		for (int i = 0; i < LC.size(); i++) {
+			std::cout << "LC[i] = " << LC[i] << std::endl ;
+			if (LC[i] == nodo)
+				LC.erase(LC.begin()+i);
+		}
 	
 	}
+	std::cout << "dentro de recubrimientoN" << std::endl ;
 
 	return sol ;
 
@@ -79,9 +91,12 @@ int main (int argc, char* argv[]) {
 	std::vector<std::vector<int> > matriz ; 
 	std::ifstream flujo (archivo) ;
 	
+	std::cout << "a" << std::endl;
+
 	if (flujo) {
 		flujo >> tamanio ;
 		matriz.resize(tamanio);
+std::cout << "b" << std::endl ;
 		for (int i = 0; i < tamanio; i++)
 			matriz[i].resize(tamanio);
 		std::cout <<"TAM: "<< tamanio << std::endl;
@@ -94,16 +109,17 @@ int main (int argc, char* argv[]) {
 				matriz[f][c] = dato; 
 			}
 		}
-		std::cout << "\n\n" ;
-	
+std::cout << "c" << std::endl ;
+//		std::cout << "\n\n" << std::endl;
+	std::cout << "f" << std::endl ;
 	}
 	else {
 		std::cout << "Error al abrir el fichero" << std::endl ;
 		return (-2);
 	}
-
+std::cout << "d" << std::endl ;
 	std::vector<int> solucion = recubrimiento ( matriz, tamanio ) ;
-
+std::cout << "e" << std::endl ;
 	std::cout << "Conjunto de aristas solución: " ;
 	for (int i = 0; i < solucion.size(); ++i) 
 			std::cout << solucion[i] << "," ;
