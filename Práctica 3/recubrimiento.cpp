@@ -16,27 +16,33 @@ bool contains (std::vector<int> LC, int x) {
 
 int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
 
+	std::cout << "dentro de gNMI" << std::endl ;
+
 	int N = m.size();
+	std::cout << "N= " << N << std::endl ;
 	int max = 0 ;
 	int contador = 0 ;
 
-	for (int f = 0 ; f < N ; f++) {
+	for (int f = 0 ; f < N-1 ; f++) {
 		
-		if (contador > max) 
-			max = f ;
-
-		contador = 0 ;
-
 		if ( contains(LC, f) ) {
+			std::cout << "LC contiene a f que vale " << f << std::endl ;
+			if (contador > max) 
+				max = f ;
+
+			contador = 0 ;
 
 			for (int c = f+1 ; c < N ; c++) {
 				if ( m[f][c] == 1 ) 
 					contador++;
 			}
 
+
 		}
 
+
 	}
+	std::cout << "max = " << max << std::endl ;
 
 	return max ;
 
@@ -44,7 +50,7 @@ int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
 
 std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
 
-	std::cout << "dentro de recubrimiento" << std::endl ;
+	//std::cout << "dentro de recubrimiento" << std::endl ;
 
 	std::vector<int> sol ;
 	std::vector<int> LC ;
@@ -55,24 +61,26 @@ std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
   for (int i= 0; i<N; i++)
     LC.push_back(i);
 
-	std::cout << "dentro de recubrimiento2" << std::endl ;
+	//std::cout << "dentro de recubrimiento2" << std::endl ;
 
 
-  while ( !LC.empty() ) { // Mientras la lista de candidatos no esté vacía...
-	std::cout << "dentro de recubrimientoI" << std::endl ;
+  while ( !LC.empty() && nodo != 0) { // Mientras la lista de candidatos no esté vacía...
+	//std::cout << "dentro de recubrimientoI" << std::endl ;
 
 		nodo = getNodoMaxInc(m, LC);
-		std::cout << "nodo = " << nodo << std::endl ;
-		sol.push_back(nodo);
-	std::cout << "dentro de recubrimientoI2" << std::endl ;
-		for (int i = 0; i < LC.size(); i++) {
-			std::cout << "LC[i] = " << LC[i] << std::endl ;
-			if (LC[i] == nodo)
-				LC.erase(LC.begin()+i);
-		}
+		//std::cout << "nodo = " << nodo << std::endl ;
+		if (nodo != 0) {
+			sol.push_back(nodo);
+		//std::cout << "dentro de recubrimientoI2" << std::endl ;
+			for (int i = 0; i < LC.size(); i++) {
+		//		std::cout << "LC[i] = " << LC[i] << std::endl ;
+				if (LC[i] == nodo)
+					LC.erase(LC.begin()+i);
+			}
+		}	
 	
 	}
-	std::cout << "dentro de recubrimientoN" << std::endl ;
+	//std::cout << "dentro de recubrimientoN" << std::endl ;
 
 	return sol ;
 
