@@ -113,6 +113,8 @@ std::vector<int> recubrimiento (std::vector<std::vector<int> > m) {
 
 int main (int argc, char* argv[]) {
 
+	/* Entrada de argumentos y creación de variables */
+
 	if (argc < 2) {
 		std::cout << "Error en la entrada de parámetros. Recuerde: ./recubrimiento fichero_entrada" << std::endl ;
 		return (-1);
@@ -123,6 +125,7 @@ int main (int argc, char* argv[]) {
 	std::vector<std::vector<int> > matriz ;
 	std::ifstream flujo (archivo) ;
 
+	/* Leemos la matriz de adyacencia del grafo */
 
 	if (flujo) {
 		flujo >> tamanio ;
@@ -145,6 +148,9 @@ int main (int argc, char* argv[]) {
 		std::cout << "Error al abrir el fichero" << std::endl ;
 		return (-2);
 	}
+
+	/* Aplicamos el algoritmo y devolvemos el resultado */
+
 	std::vector<int> solucion = recubrimiento (matriz) ;
 	std::cout << "Conjunto de aristas solución: " ;
 	for (int i = 0; i < solucion.size(); ++i)
