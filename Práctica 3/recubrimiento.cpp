@@ -20,8 +20,8 @@ int getNodoMaxInc (std::vector<std::vector<int> > m, std::vector<int> LC) {
 
 	int N = m.size();
 	std::cout << "N= " << N << std::endl ;
-	int max = 0 ;
-	int max_incidencias ;
+	int max = -1 ;
+	int max_incidencias = 0 ;
 	int contador = 0 ;
 
 	for (int f = 0 ; f < N-1 ; f++) {
@@ -67,18 +67,21 @@ std::vector<int> recubrimiento (std::vector<std::vector<int> > m , int N) {
 	//std::cout << "dentro de recubrimiento2" << std::endl ;
 
 
-  while ( !LC.empty() ) { // Mientras la lista de candidatos no esté vacía...
+  while ( !LC.empty() && (nodo != -1) ) { // Mientras la lista de candidatos no esté vacía...
 	//std::cout << "dentro de recubrimientoI" << std::endl ;
 
 		nodo = getNodoMaxInc(m, LC);
 		std::cout << "nodo = " << nodo << std::endl ;
-		if (nodo != 0) {
+
+		if (nodo != -1) {
 			sol.push_back(nodo);
 		//std::cout << "dentro de recubrimientoI2" << std::endl ;
 			for (int i = 0; i < LC.size(); i++) {
-		//		std::cout << "LC[i] = " << LC[i] << std::endl ;
-				if (LC[i] == nodo)
+				std::cout << "LC[i] = " << LC[i] << std::endl ;
+				if (LC[i] == nodo) {
+					std::cout << "voy a eliminar " << nodo << " de LC" << std::endl ;
 					LC.erase(LC.begin()+i);
+				}
 			}
 		}
 
@@ -133,7 +136,7 @@ std::cout << "d" << std::endl ;
 std::cout << "e" << std::endl ;
 	std::cout << "Conjunto de aristas solución: " ;
 	for (int i = 0; i < solucion.size(); ++i)
-			std::cout << solucion[i] << "," ;
+			std::cout << solucion[i] << " " ;
 
 	std::cout << "\n" ;
 
