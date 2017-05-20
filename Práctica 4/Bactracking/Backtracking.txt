@@ -1,1 +1,15 @@
+Enunciado: En un tablero de ajedrez, un caballo debe pasar por todas las casillas del tablero sin pisar dos veces la
+misma casilla y sin hacer ningún movimiento que lo saque del tablero. Sabiendo que un caballo se puede
+mover en movimientos en L, diseñar las componentes de un algoritmo Backtracking o Branch&Bound que resuelva el problema.
+
+Representación: T(x1, x2, ... , xN) es un vector donde cada componente representa una posición en el tablero, numerando las casillas
+en orden creciente, tomando como la casilla 1 la situada arriba a la izquierda y la n-ésima la situada abajo a la derecha
+
+Restricciones implícitas: xi tendrá valores entre 1 y NxN (inclusive), el tamaño del tablero
+
+Restricciones explícitas: Al recorrer el tablero no puede salirse del tablero ni visitar por una casilla ya visitada
+
+Función objetivo: Encontrar una tupla T(x1, x2, ... , xN) que sea solución al problema (Encontrar un recorrido
+que pase por todas las casillas en NxN movimientos)
+
 Criterio de parada: Encontrar un recorrido que pase por todas las casillas
