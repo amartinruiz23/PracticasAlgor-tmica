@@ -1,0 +1,1 @@
+Criterio de parada: Encontrar un recorrido que pase por todas las casillas
