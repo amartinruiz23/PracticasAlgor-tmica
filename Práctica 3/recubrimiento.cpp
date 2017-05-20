@@ -184,7 +184,7 @@ int main (int argc, char* argv[]) {
 	/* Aplicamos el algoritmo y devolvemos el resultado */
 
 	std::vector<int> solucion = recubrimiento (matriz) ;
-	std::cout << "Conjunto de aristas solución: " ;
+	std::cout << "Solución = Recubrimiento formado por los nodos " ;
 	for (int i = 0; i < solucion.size(); ++i)
 			std::cout << solucion[i] << " " ;
 
