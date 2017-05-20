@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define N 8
+#define N 7
 #define ncuad N*N
 
 void mover(int tablero[][N], int i, int pos_x, int pos_y,bool &encontrado);
@@ -20,19 +20,21 @@ int main(void)
     tablero[i][j] = 0;
 
    /* pone el primer movimiento */
-  tablero[5][5] = 1;
+  tablero[0][0] = 1;
   mover(tablero,2,0,0, encontrado);
 
   return 0;
 }
 
 void imprimir_solucion(int tablero[][N], bool &encontrado){
-printf("~~~~~~~~~~~~~~~~\n");
+  printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++)
       printf("%3d ", tablero[i][j]);
     putchar('\n');
   }
+  printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
   encontrado = true;
 }
 
