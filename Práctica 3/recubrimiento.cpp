@@ -127,15 +127,12 @@ std::vector<int> recubrimiento (std::vector<std::vector<int> > m) {
 	
 		nodo = getNodoMaxInc(m, LCU);								// obten el nodo con mayor nº de incidencias
 	
-		if (nodo != -1) {
 
-			if ( !contains(NC,nodo) )
-				NC.push_back(nodo);												// añadimos el nodo al recubrimiento
-			adyacencias(nodo, NC, m);									// y sus adyacentes
+		if ( !contains(NC,nodo) )
+			NC.push_back(nodo);												// añadimos el nodo al recubrimiento
+		adyacencias(nodo, NC, m);									// y sus adyacentes
 
-			sol.push_back(nodo);											// añadimos el nodo a la solución
-
-		}
+		sol.push_back(nodo);											// añadimos el nodo a la solución
 
 	}
 
@@ -156,13 +153,14 @@ int main (int argc, char* argv[]) {
 	int dato ;
 	std::vector<std::vector<int> > matriz ;
 	std::ifstream flujo (archivo) ;
+	int i ;
 
 	/* Leemos la matriz de adyacencia del grafo */
 
 	if (flujo) {
 		flujo >> tamanio ;
 		matriz.resize(tamanio);
-		for (int i = 0; i < tamanio; i++)
+		for (i = 0; i < tamanio; i++)
 			matriz[i].resize(tamanio);
 		std::cout <<"TAM: "<< tamanio << std::endl;
 
@@ -185,9 +183,11 @@ int main (int argc, char* argv[]) {
 
 	std::vector<int> solucion = recubrimiento (matriz) ;
 	std::cout << "Solución = Recubrimiento formado por los nodos " ;
-	for (int i = 0; i < solucion.size(); ++i)
+	for (i = 0; i < solucion.size(); ++i)
 			std::cout << solucion[i] << " " ;
 
 	std::cout << "\n" ;
+
+	std::cout << "Coste = " << i << std::endl ;
 
 }
