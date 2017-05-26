@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-#define N 7
+#define N 8
 #define ncuad N*N
 
 void mover(int tablero[][N], int i, int pos_x, int pos_y,bool &encontrado);
@@ -8,10 +9,16 @@ void mover(int tablero[][N], int i, int pos_x, int pos_y,bool &encontrado);
 const int ejex[8] = { -1,-2,-2,-1, 1, 2, 2, 1 },
           ejey[8] = { -2,-1, 1, 2, 2, 1,-1,-2 };
 
-int main(void)
-{
+int main(int argc, char const *argv[]) {
+
+  if(argc < 3 || atoi(argv[1]) < 0 || atoi(argv[1]) > N-1 || atoi(argv[2]) < 0 || atoi(argv[2]) > N-1 )    {
+      fprintf(stderr, "ERROR: Faltan las posiciones de inicio o son incorrectas, el tablero es de %dx%d\n", N,N);
+      exit(-1);
+  }
   int tablero[N][N]; /* tablero del caballo. */
   int i,j,q;
+  int x = atoi(argv[1]);
+  int y = atoi(argv[2]);
   bool encontrado = false;
 
    /* inicializa el tablero a cero */
@@ -20,14 +27,14 @@ int main(void)
     tablero[i][j] = 0;
 
    /* pone el primer movimiento */
-  tablero[0][0] = 1;
-  mover(tablero,2,0,0, encontrado);
+  tablero[x][y] = 1;
+  mover(tablero,2,x,y, encontrado);
 
   return 0;
 }
 
 void imprimir_solucion(int tablero[][N], bool &encontrado){
-  printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+  printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < N; j++)
       printf("%3d ", tablero[i][j]);
